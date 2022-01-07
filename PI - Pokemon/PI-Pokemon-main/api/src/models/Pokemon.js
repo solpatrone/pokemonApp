@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.TEXT,
       allowNull: false, //debe ser requerido obligatoriamente
+      unique: true,
     },
     id: {
       type: DataTypes.UUID, //creo un id unico (32 caracteres, pueden ser num o letras, separados por 4 guiones)
