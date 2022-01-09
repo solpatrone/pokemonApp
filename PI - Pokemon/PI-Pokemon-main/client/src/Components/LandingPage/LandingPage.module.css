@@ -1,0 +1,61 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  height: 290px;
+  margin-bottom: 60px;
+}
+
+.logo {
+  width: 320px;
+  margin-bottom: -100px;
+  margin-top: -50px;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 6px;
+  align-items: center;
+  width: 300px;
+  font-size: 30px;
+  color: #132c33;
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 201, 48, 1) 0%,
+    rgba(255, 164, 6, 1) 100%
+  );
+  font-family: "Roboto Slab", serif;
+  transition: all 0.7s ease-in-out;
+}
+
+button:hover {
+  box-shadow: 2px 3px 16px 3px rgb(245, 192, 58, 0.7);
+  color: #132c33;
+  font-family: "Roboto Slab", serif;
+  transform: scale(1.1);
+}
+
+/* color-yellow: #FFC93C
+light-color: #DBF6E9
+sky-blue: #9DDFD3
+dark-purple: #31326F
+dark-blue: 132C33 */
