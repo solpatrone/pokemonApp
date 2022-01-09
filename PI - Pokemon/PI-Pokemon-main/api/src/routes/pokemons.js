@@ -6,17 +6,22 @@ const { Pokemon, Type } = require("../db");
 app.get("/", async (req, res) => {
   const { name } = req.query;
   try {
+    const pokemons = await getAllInfo();
     if (name) {
-      const pokemons = await getAllInfo();
       const foundPokemon = pokemons.find(
         (p) => p.name.toLowerCase() === name.toLowerCase()
       );
-      console.log(foundPokemon);
-      res.send(foundPokemon);
+      //console.log(foundPokemon);
+      // res.send(foundPokemon);
+      if (foundPokemon) {
+        res.send(foundPokemon);
+      } else {
+        res.send("Tu pokemon no ha sido encontrado");
+      }
     }
 
-    let pokemon = await getAllInfo();
-    let pokeInfo = pokemon.map((p) => {
+    // let pokemon = await getAllInfo();
+    let pokeInfo = pokemons.map((p) => {
       return {
         name: p.name,
         img: p.img,
