@@ -8,27 +8,26 @@ app.get("/", async (req, res) => {
   try {
     const pokemons = await getAllInfo();
     if (name) {
-      const foundPokemon = pokemons.find(
+      const foundPokemon = pokemons.filter(
         (p) => p.name.toLowerCase() === name.toLowerCase()
       );
-      //console.log(foundPokemon);
-      // res.send(foundPokemon);
       if (foundPokemon) {
-        res.send(foundPokemon);
+        return res.send(foundPokemon);
       } else {
-        res.send("Tu pokemon no ha sido encontrado");
+        return res.send("Tu pokemon no ha sido encontrado");
       }
     }
 
-    // let pokemon = await getAllInfo();
     let pokeInfo = pokemons.map((p) => {
       return {
+        id: p.id,
         name: p.name,
         img: p.img,
         type: p.types,
+        attack: p.attack,
       };
     });
-    res.json(pokeInfo);
+    return res.send(pokeInfo);
   } catch (e) {
     console.log(e);
   }
@@ -47,7 +46,18 @@ app.get("/:idPokemon", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  const { name, hp, strength, defense, speed, weight, img, type } = req.body;
+  const {
+    name,
+    hp,
+    strength,
+    defense,
+    speed,
+    weight,
+    height,
+    img,
+    type,
+    createdInDb,
+  } = req.body;
   try {
     let newPokemon = await Pokemon.create({
       name,
@@ -56,7 +66,9 @@ app.post("/", async (req, res) => {
       defense,
       speed,
       weight,
+      height,
       img,
+      createdInDb,
     });
 
     //los tipos solo pueden coincidir con los guardadas en db, por lo que le pido a mi modelo Type
@@ -69,7 +81,8 @@ app.post("/", async (req, res) => {
 
     //hago la relacion entre ambas tablas
     newPokemon.addType(newType);
-    res.send("Tu pokemon a sido creado");
+    console.log(newPokemon);
+    res.send(newPokemon);
   } catch (e) {
     console.log(e);
   }

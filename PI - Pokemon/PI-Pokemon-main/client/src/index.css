@@ -9,7 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale; */
   font-family: "Roboto Slab", serif;
   /* background-image: url("./images/bkg-pokemon.jpg"); */
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   background-size: cover;
   min-height: 100vh;
 }
