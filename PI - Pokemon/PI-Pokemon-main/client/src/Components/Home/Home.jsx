@@ -70,7 +70,9 @@ export default function Home() {
     <div className={s.container}>
       <header className={s.header}>
         <div className={s.image}>
-          <img src={logo} alt="Logo pokemon" className={s.logo} />
+          <Link to="/home">
+            <img src={logo} alt="Logo pokemon" className={s.logo} />
+          </Link>
         </div>
         <div className={s.functional}>
           <div className={s.ppal}>
@@ -122,7 +124,7 @@ export default function Home() {
         <div className={s.cards}>
           {currentPokemons &&
             currentPokemons.map((p) => (
-              <Card name={p.name} type={p.type} img={p.img} key={p.id} />
+              <Card name={p.name} types={p.types} img={p.img} key={p.id} />
             ))}
         </div>
         <div className={s.paginado}>

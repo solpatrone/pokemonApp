@@ -11,10 +11,11 @@ app.get("/", async (req, res) => {
       const foundPokemon = pokemons.filter(
         (p) => p.name.toLowerCase() === name.toLowerCase()
       );
-      if (foundPokemon) {
+      if (foundPokemon.length > 0) {
+        console.log(foundPokemon);
         return res.send(foundPokemon);
       } else {
-        return res.send("Tu pokemon no ha sido encontrado");
+        return res.status(400).send("Tu pokemon no ha sido encontrado");
       }
     }
 
@@ -23,8 +24,9 @@ app.get("/", async (req, res) => {
         id: p.id,
         name: p.name,
         img: p.img,
-        type: p.types,
+        types: p.types,
         attack: p.attack,
+        createdInDb: p.createdInDb || false,
       };
     });
     return res.send(pokeInfo);
@@ -55,7 +57,7 @@ app.post("/", async (req, res) => {
     weight,
     height,
     img,
-    type,
+    types,
     createdInDb,
   } = req.body;
   try {
@@ -75,7 +77,7 @@ app.post("/", async (req, res) => {
     //que encuentre todos aquellos donde el name sea igual a lo pasado por body
     let newType = await Type.findAll({
       where: {
-        name: type,
+        name: types,
       },
     });
 

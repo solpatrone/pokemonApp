@@ -24,7 +24,7 @@ function rootReducer(state = initialState, action) {
         action.payload === "all"
           ? allPokemons
           : allPokemons.filter((pokemon) =>
-              pokemon.type.includes(action.payload)
+              pokemon.types.includes(action.payload)
             );
       return {
         ...state,
@@ -96,6 +96,7 @@ function rootReducer(state = initialState, action) {
 
     case "FILTER_BY_CREATION":
       const pokemonCopyArray = state.pokemons;
+      console.log(pokemonCopyArray);
       const filteredCreation =
         action.payload === "createdInDb"
           ? pokemonCopyArray.filter((pokemon) => pokemon.createdInDb)
@@ -107,7 +108,7 @@ function rootReducer(state = initialState, action) {
       };
     case "POST_POKEMON":
       return {
-        state,
+        ...state,
       };
     default:
       return state;

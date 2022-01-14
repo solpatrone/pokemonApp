@@ -18,6 +18,7 @@ export function getPokemonByName(name) {
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3001/pokemons?name=" + name);
+      console.log(json.data);
       return dispatch({
         type: "GET_POKEMON_BY_NAME",
         payload: json.data,

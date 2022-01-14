@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     img: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(1234),
       allowNull: true,
     },
     //creo un flag para identificar a mis pokemon creados en db de los que vienen de api
