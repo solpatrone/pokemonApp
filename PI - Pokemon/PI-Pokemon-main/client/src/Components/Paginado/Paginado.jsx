@@ -8,8 +8,8 @@ export default function Paginado({ pokemonsPerPage, allPokemons, paginado }) {
   }
 
   return (
-    <div className={s.container}>
-      <ul className={s.list}>
+    <div className={s.containerPag}>
+      <ul className={s.listPag}>
         {pageNumbers &&
           pageNumbers.map((p) => (
             <li key={p} className={s.item}>

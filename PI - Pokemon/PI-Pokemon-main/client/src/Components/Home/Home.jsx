@@ -124,7 +124,14 @@ export default function Home() {
         <div className={s.cards}>
           {currentPokemons &&
             currentPokemons.map((p) => (
-              <Card name={p.name} types={p.types} img={p.img} key={p.id} />
+              <Card
+                name={p.name}
+                types={p.types}
+                img={p.img}
+                key={p.id}
+                id={p.id}
+                createdInDb={p.createdInDb}
+              />
             ))}
         </div>
         <div className={s.paginado}>

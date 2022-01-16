@@ -39,7 +39,9 @@ app.get("/:idPokemon", async (req, res) => {
   const { idPokemon } = req.params;
   try {
     const pokemons = await getAllInfo();
-    const foundPokemon = pokemons.find((p) => p.id === Number(idPokemon));
+    const foundPokemon = pokemons.find(
+      (p) => p.id.toString() === idPokemon.toString()
+    );
 
     res.send(foundPokemon);
   } catch (e) {
@@ -61,30 +63,33 @@ app.post("/", async (req, res) => {
     createdInDb,
   } = req.body;
   try {
-    let newPokemon = await Pokemon.create({
-      name,
-      hp,
-      strength,
-      defense,
-      speed,
-      weight,
-      height,
-      img,
-      createdInDb,
-    });
+    if (name) {
+      let newPokemon = await Pokemon.create({
+        name,
+        hp,
+        strength,
+        defense,
+        speed,
+        weight,
+        height,
+        img,
+        createdInDb,
+      });
 
-    //los tipos solo pueden coincidir con los guardadas en db, por lo que le pido a mi modelo Type
-    //que encuentre todos aquellos donde el name sea igual a lo pasado por body
-    let newType = await Type.findAll({
-      where: {
-        name: types,
-      },
-    });
+      //los tipos solo pueden coincidir con los guardadas en db, por lo que le pido a mi modelo Type
+      //que encuentre todos aquellos donde el name sea igual a lo pasado por body
+      let newType = await Type.findAll({
+        where: {
+          name: types,
+        },
+      });
 
-    //hago la relacion entre ambas tablas
-    newPokemon.addType(newType);
-    console.log(newPokemon);
-    res.send(newPokemon);
+      //hago la relacion entre ambas tablas
+      newPokemon.addType(newType);
+      return res.send(newPokemon);
+    } else {
+      return res.status(404).send("Falta ingresar el nombre del pokemon");
+    }
   } catch (e) {
     console.log(e);
   }

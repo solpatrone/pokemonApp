@@ -48,3 +48,8 @@
     rgba(255, 164, 6, 1) 100%
   );
 }
+
+.idPoke {
+  text-decoration: none;
+  color: #1b1b1b;
+}

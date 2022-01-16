@@ -5,6 +5,7 @@ import { getPokemonById } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import s from "./Detail.module.css";
 import logo from "../../images/log.png";
+import other from "../../images/default.jpg";
 
 export default function Detail(props) {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export default function Detail(props) {
             <div className={s.imageCont}>
               <h1 className={s.title}>{pokemon.name}</h1>
               <img
-                src={pokemon.img}
+                src={pokemon.img ? pokemon.img : other}
                 alt="Pokemon frontal pic"
                 className={s.img}
               />
@@ -37,7 +38,12 @@ export default function Detail(props) {
               <div className={s.info}>
                 <h3>Información:</h3>
                 <p>Id: {pokemon.id}</p>
-                <p>Type: {pokemon.types && pokemon.types.join(", ")}</p>
+                <p>
+                  Type:
+                  {!pokemon.createdInDb
+                    ? pokemon.types + " "
+                    : pokemon.types.map((p) => p.name + " ")}
+                </p>
                 <p>Vida: {pokemon.hp}</p>
                 <p>Fuerza: {pokemon.attack}</p>
                 <p>Defensa: {pokemon.defense}</p>

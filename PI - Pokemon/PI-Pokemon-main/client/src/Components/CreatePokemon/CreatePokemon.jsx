@@ -9,7 +9,7 @@ import s from "./CreatePokemon.module.css";
 export function validate(pokemon) {
   let error = {};
 
-  if (!pokemon.name) {
+  if (!pokemon.name || pokemon.name === "") {
     error.name = "Nombre requerido.";
   } else if (!/\S{5,20}[^0-9]/.test(pokemon.name)) {
     error.name =
@@ -17,22 +17,32 @@ export function validate(pokemon) {
   }
 
   if (pokemon.attack < 0 || pokemon.attack > 200) {
-    error.attack = "La fuerza debe ser mayor a 0 y menor a 200 puntos.";
+    error.attack = "El número debe ser mayor a 0 y menor a 200";
   }
 
-  if (!pokemon.img) {
-    error.img = "Imagen requerida.";
+  if (pokemon.hp < 0) {
+    error.hp = "El número debe ser mayor a 0";
   }
 
-  // hp: 0,
-  //   attack: 0,
-  //   defense: 0,
-  //   speed: 0,
-  //   height: 0,
-  //   weight: 0,
-  //   img: "",
-  //   types:
+  if (pokemon.defense < 0) {
+    error.defense = "El número debe ser mayor a 0";
+  }
 
+  if (pokemon.speed < 0) {
+    error.speed = "El número debe ser mayor a 0";
+  }
+
+  if (pokemon.height < 0) {
+    error.height = "El número debe ser mayor a 0";
+  }
+
+  if (pokemon.weight < 0) {
+    error.weight = "El número debe ser mayor a 0";
+  }
+
+  if (pokemon.types.length < 0 || pokemon.types.length > 4) {
+    error.types = "Seleccione entre 1 y 3 tipos";
+  }
   return error;
 }
 
@@ -69,16 +79,27 @@ export default function CreatePokemon() {
     setError(validate({ ...pokemon, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(postPokemon(pokemon));
-    alert("Tu pokemon ha sido creado");
-  }
-
   function handleSelect(e) {
     setPokemon({
       ...pokemon,
       types: [...pokemon.types, e.target.value],
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(postPokemon(pokemon));
+    alert("Tu pokemon ha sido creado");
+    setPokemon({
+      name: "",
+      hp: 0,
+      attack: 0,
+      defense: 0,
+      speed: 0,
+      height: 0,
+      weight: 0,
+      img: "",
+      types: [],
     });
   }
 
@@ -111,7 +132,6 @@ export default function CreatePokemon() {
                   name="name"
                   autoComplete="off"
                   onChange={(e) => handleChange(e)}
-                  required
                 />
                 {error.name && (
                   <strong
@@ -135,6 +155,17 @@ export default function CreatePokemon() {
                   name="hp"
                   onChange={(e) => handleChange(e)}
                 />
+                {error.hp && (
+                  <strong
+                    style={{
+                      color: "#c90c0c",
+                      fontSize: "14px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    {error.hp}
+                  </strong>
+                )}
               </div>
 
               <div className={s.inputContainer}>
@@ -167,6 +198,17 @@ export default function CreatePokemon() {
                   name="defense"
                   onChange={(e) => handleChange(e)}
                 />
+                {error.defense && (
+                  <strong
+                    style={{
+                      color: "#c90c0c",
+                      fontSize: "14px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    {error.defense}
+                  </strong>
+                )}
               </div>
 
               <div className={s.inputContainer}>
@@ -178,6 +220,17 @@ export default function CreatePokemon() {
                   name="speed"
                   onChange={(e) => handleChange(e)}
                 />
+                {error.speed && (
+                  <strong
+                    style={{
+                      color: "#c90c0c",
+                      fontSize: "14px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    {error.speed}
+                  </strong>
+                )}
               </div>
 
               <div className={s.inputContainer}>
@@ -189,6 +242,17 @@ export default function CreatePokemon() {
                   name="height"
                   onChange={(e) => handleChange(e)}
                 />
+                {error.height && (
+                  <strong
+                    style={{
+                      color: "#c90c0c",
+                      fontSize: "14px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    {error.height}
+                  </strong>
+                )}
               </div>
 
               <div className={s.inputContainer}>
@@ -200,6 +264,17 @@ export default function CreatePokemon() {
                   name="weight"
                   onChange={(e) => handleChange(e)}
                 />
+                {error.weight && (
+                  <strong
+                    style={{
+                      color: "#c90c0c",
+                      fontSize: "14px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    {error.weight}
+                  </strong>
+                )}
               </div>
 
               <div className={s.inputContainer}>
@@ -210,17 +285,7 @@ export default function CreatePokemon() {
                   value={pokemon.img}
                   name="img"
                   onChange={(e) => handleChange(e)}
-                  className={error.img && "s.danger"}
                 />
-                <strong
-                  style={{
-                    color: "#c90c0c",
-                    fontSize: "14px",
-                    fontWeight: "lighter",
-                  }}
-                >
-                  {error.img}
-                </strong>
               </div>
 
               <div className={s.inputContainer}>
@@ -233,6 +298,7 @@ export default function CreatePokemon() {
                       </option>
                     ))}
                 </select>
+
                 <div>
                   <ul>
                     {pokemon.types.map((tipo) => (
