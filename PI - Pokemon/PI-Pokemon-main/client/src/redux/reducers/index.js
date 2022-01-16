@@ -18,18 +18,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         types: action.payload,
       };
-    case "FILTER_BY_TYPE":
-      const allPokemons = state.pokemons;
-      const filteredArray =
-        action.payload === "all"
-          ? allPokemons
-          : allPokemons.filter((pokemon) =>
-              pokemon.types.includes(action.payload)
-            );
-      return {
-        ...state,
-        copyPokemons: filteredArray,
-      };
     case "GET_POKEMON_BY_ID":
       return {
         ...state,
@@ -40,6 +28,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         copyPokemons: action.payload,
       };
+
     case "ORDER_BY_NAME":
       let sortedArray =
         action.payload === "asc_alf"
@@ -65,7 +54,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: sortedArray,
       };
-
     case "ORDER_BY_STRENGTH":
       let orderedArray =
         action.payload === "asc_str"
@@ -106,6 +94,19 @@ function rootReducer(state = initialState, action) {
         copyPokemons:
           action.payload === "all" ? state.pokemons : filteredCreation,
       };
+    case "FILTER_BY_TYPE":
+      const allPokemons = state.pokemons;
+      const filteredArray =
+        action.payload === "all"
+          ? allPokemons
+          : allPokemons.filter((pokemon) =>
+              pokemon.types.includes(action.payload)
+            );
+      return {
+        ...state,
+        copyPokemons: filteredArray,
+      };
+
     case "POST_POKEMON":
       return {
         ...state,

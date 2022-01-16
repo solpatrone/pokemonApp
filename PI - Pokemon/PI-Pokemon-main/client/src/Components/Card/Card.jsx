@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./Card.module.css";
 import { Link } from "react-router-dom";
 import other from "../../images/default.jpg";
+import style from "./Card.module.css";
 
 export default function Card({ name, img, types, id, createdInDb }) {
   return (

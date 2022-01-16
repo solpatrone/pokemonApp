@@ -1,12 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
-import Card from "../Card/Card";
-import Paginado from "../Paginado/Paginado";
-import s from "./Home.module.css";
-import logo from "../../images/log.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Paginado from "../Paginado/Paginado";
+import SearchBar from "../SearchBar/SearchBar";
+import Card from "../Card/Card";
 import {
   filterByType,
   getAllPokemons,
@@ -15,6 +13,8 @@ import {
   orderByStrenght,
   filterByCreation,
 } from "../../redux/actions";
+import logo from "../../images/log.png";
+import s from "./Home.module.css";
 
 export default function Home() {
   //estados globales

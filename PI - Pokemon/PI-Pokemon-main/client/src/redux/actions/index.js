@@ -31,24 +31,32 @@ export function getPokemonByName(name) {
 
 export function getPokemonById(id) {
   return function (dispatch) {
-    return fetch("http://localhost:3001/pokemons/" + id)
-      .then((response) => response.json())
-      .then((data) =>
-        dispatch({
-          type: "GET_POKEMON_BY_ID",
-          payload: data,
-        })
-      );
+    try {
+      return fetch("http://localhost:3001/pokemons/" + id)
+        .then((response) => response.json())
+        .then((data) =>
+          dispatch({
+            type: "GET_POKEMON_BY_ID",
+            payload: data,
+          })
+        );
+    } catch (e) {
+      console.log();
+    }
   };
 }
 
 export function getAllTypes() {
   return async function (dispatch) {
-    const json = await axios.get("http://localhost:3001/types");
-    return dispatch({
-      type: "GET_ALL_TYPES",
-      payload: json.data,
-    });
+    try {
+      const json = await axios.get("http://localhost:3001/types");
+      return dispatch({
+        type: "GET_ALL_TYPES",
+        payload: json.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 }
 
