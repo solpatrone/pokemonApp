@@ -6,7 +6,8 @@
 .header {
   display: flex;
   justify-content: space-between;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  background-image: url("../../images/dark-bgd.jpg");
+  background-size: cover;
 }
 
 .logo {
@@ -56,9 +57,10 @@
 }
 
 .footer {
-  background-image: linear-gradient(to bottom, #30cfd0 0%, #330867 100%);
+  background-image: url("../../images/dark-bgd.jpg");
+  background-size: cover;
   color: #fff;
-  font-weight: bold;
+  font-weight: lighter;
   text-align: center;
   line-height: 30px;
   height: 30px;
@@ -89,18 +91,20 @@
 }
 
 .inputContainer .btn {
-  color: #132c33;
-  background: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 201, 48, 1) 0%,
-    rgba(255, 164, 6, 1) 100%
-  );
+  padding: 6px;
+  color: #fbd148;
+
+  background-color: rgb(19, 19, 19, 0.7);
+  border: 1px solid #fbd148;
   border-radius: 3px;
   text-decoration: none;
   padding: 6px 16px;
   font-size: 16px;
   margin: 10px 0px;
+}
+
+.inputContainer .btn:hover {
+  box-shadow: 2px 3px 16px 3px rgb(245, 192, 58, 0.7);
 }
 
 .inputContainer select {
@@ -133,11 +137,9 @@ li {
   border: none;
   border-radius: 15%;
   padding: 10px;
-  color: #132c33;
-  background: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 201, 48, 1) 0%,
-    rgba(255, 164, 6, 1) 100%
-  );
+  padding: 6px;
+  color: #fbd148;
+
+  background-color: rgb(19, 19, 19, 0.7);
+  border: 1px solid #fbd148;
 }

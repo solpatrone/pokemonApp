@@ -10,4 +10,5 @@ body {
   font-family: "Roboto Slab", serif; /* background-image: url("./images/bkg-pokemon.jpg"); */
   background-size: cover;
   min-height: 100vh;
+  background-image: url("./images/dark-bgd.jpg");
 }

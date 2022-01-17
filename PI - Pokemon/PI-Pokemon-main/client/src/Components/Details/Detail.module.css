@@ -7,7 +7,8 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  background-image: url("../../images/dark-bgd.jpg");
+  background-size: cover;
 }
 
 .logo {
@@ -39,7 +40,8 @@
 }
 
 .footer {
-  background-image: linear-gradient(to bottom, #30cfd0 0%, #330867 100%);
+  background-image: url("../../images/dark-bgd.jpg");
+  background-size: cover;
   color: #fff;
   font-weight: bold;
   text-align: center;
