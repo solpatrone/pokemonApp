@@ -18,10 +18,14 @@ export default function Detail(props) {
   return (
     <div className={s.container}>
       <header className={s.header}>
-        <Link to="/home" className={s.link}>
+        <Link to="/home">
           <img src={logo} alt="Logo pokemon" className={s.logo} />
         </Link>
-        <div className={s.funcional}></div>
+        <div className={s.funcional}>
+          <Link to="/home" className={s.link}>
+            Home
+          </Link>
+        </div>
       </header>
       <main className={s.main}>
         <div className={s.cardContainer}>

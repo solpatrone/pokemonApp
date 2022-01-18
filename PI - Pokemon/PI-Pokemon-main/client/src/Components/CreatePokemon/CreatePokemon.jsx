@@ -19,26 +19,32 @@ export function validate(pokemon) {
 
   if (pokemon.attack < 0 || pokemon.attack > 200) {
     error.attack = "The number should be higher than 0 and lower than 200";
+    error.disableBtn = true;
   }
 
   if (pokemon.hp < 0) {
     error.hp = "The number should be higher than 0";
+    error.disableBtn = true;
   }
 
   if (pokemon.defense < 0) {
     error.defense = "The number should be higher than 0";
+    error.disableBtn = true;
   }
 
   if (pokemon.speed < 0) {
     error.speed = "The number should be higher than 0";
+    error.disableBtn = true;
   }
 
   if (pokemon.height < 0) {
     error.height = "The number should be higher than 0";
+    error.disableBtn = true;
   }
 
   if (pokemon.weight < 0) {
     error.weight = "The number should be higher than 0";
+    error.disableBtn = true;
   }
 
   return error;
@@ -56,6 +62,7 @@ export default function CreatePokemon() {
     img: "",
     types: [],
   });
+
   const [error, setError] = useState({ disableBtn: true });
 
   const dispatch = useDispatch();
@@ -111,9 +118,12 @@ export default function CreatePokemon() {
   return (
     <div className={s.container}>
       <header className={s.header}>
-        <Link to="/home" className={s.link}>
-          <img src={logo} alt="Logo Pokemon" className={s.logo} />
-        </Link>
+        <img src={logo} alt="Logo Pokemon" className={s.logo} />
+        <div className={s.funcional}>
+          <Link to="/home" className={s.link}>
+            Home
+          </Link>
+        </div>
       </header>
       <main className={s.main}>
         <div className={s.formContainer}>
@@ -148,7 +158,7 @@ export default function CreatePokemon() {
                 <label>Hit Points</label>
                 <input
                   type="number"
-                  placeholder="Ingresa hp"
+                  placeholder="Enter a value"
                   value={pokemon.hp}
                   name="hp"
                   onChange={(e) => handleChange(e)}
@@ -291,8 +301,8 @@ export default function CreatePokemon() {
                 <select onChange={(e) => handleSelect(e)}>
                   <option>Types</option>
                   {allTypes &&
-                    allTypes.map((t, i) => (
-                      <option value={t.name} key={i} name="types">
+                    allTypes.map((t) => (
+                      <option value={t.name} key={t.name} name="types">
                         {t.name}
                       </option>
                     ))}
@@ -301,8 +311,8 @@ export default function CreatePokemon() {
                 <div>
                   <ul>
                     {pokemon.types.map((tipo, i) => (
-                      <div className={s.selected}>
-                        <li key={i}>{tipo}</li>
+                      <div className={s.selected} key={i}>
+                        <li>{tipo}</li>
                         <button
                           onClick={() => handleDelete(tipo)}
                           className={s.btnDelete}

@@ -24,7 +24,7 @@ export default function SearchBar() {
       <input
         type="text"
         value={name}
-        placeholder="Type to search..."
+        placeholder="Type a name to search..."
         onChange={(e) => handleChange(e)}
         className={s.input}
       />

@@ -4,7 +4,6 @@ const initialState = {
   types: [],
   detail: [],
   loading: false,
-  error: "",
 };
 
 function rootReducer(state = initialState, action) {
@@ -80,6 +79,7 @@ function rootReducer(state = initialState, action) {
                 return 0;
               }
             });
+      console.log(orderedArray);
       return {
         ...state,
         copyPokemons: orderedArray,
@@ -124,11 +124,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         loading: true,
       };
-    case "ERROR":
-      return {
-        ...state,
-        error: action.payload,
-      };
+
     default:
       return state;
   }

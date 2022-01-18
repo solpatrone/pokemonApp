@@ -15,15 +15,14 @@ module.exports = (sequelize) => {
       primaryKey: true, //asigno su valor como una clave primaria
     },
     hp: {
-      //hit points atributo numerico para las vidas de un character
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    strength: {
+    attack: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    defese: {
+    defense: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },

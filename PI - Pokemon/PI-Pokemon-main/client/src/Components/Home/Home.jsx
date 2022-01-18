@@ -23,7 +23,6 @@ export default function Home() {
   const allPokemons = useSelector((state) => state.copyPokemons);
   const allTypes = useSelector((state) => state.types);
   const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
 
   //estado local para ordenamiento alfabetico
   const [order, setOrder] = useState("");
@@ -74,9 +73,7 @@ export default function Home() {
     <div className={s.container}>
       <header className={s.header}>
         <div className={s.image}>
-          <Link to="/home">
-            <img src={logo} alt="Pokemon logo" className={s.logo} />
-          </Link>
+          <img src={logo} alt="Pokemon logo" className={s.logo} />
         </div>
         <div className={s.functional}>
           <div className={s.ppal}>
@@ -127,9 +124,7 @@ export default function Home() {
 
       <main className={s.main}>
         <div className={s.cards}>
-          {error ? (
-            <div className={s.error}>Pokemon no encontrado</div>
-          ) : loading ? (
+          {loading ? (
             <LoadingPage />
           ) : (
             currentPokemons &&
@@ -153,6 +148,7 @@ export default function Home() {
           />
         </div>
       </main>
+
       <footer className={s.footer}>App created by Sol Patrone</footer>
     </div>
   );

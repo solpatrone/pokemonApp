@@ -27,25 +27,24 @@ export function getPokemonByName(name) {
         payload: json.data,
       });
     } catch (e) {
-      console.log(e.message);
-      dispatch({ type: "ERROR", payload: e.message });
+      console.log(e);
+      alert("Pokemon not found. Insert a valid name.");
     }
   };
 }
 
 export function getPokemonById(id) {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
-      return fetch("http://localhost:3001/pokemons/" + id)
-        .then((response) => response.json())
-        .then((data) =>
-          dispatch({
-            type: "GET_POKEMON_BY_ID",
-            payload: data,
-          })
-        );
+      const response = await fetch("http://localhost:3001/pokemons/" + id);
+      const data = await response.json();
+      return dispatch({
+        type: "GET_POKEMON_BY_ID",
+        payload: data,
+      });
     } catch (e) {
       console.log(e);
+      alert("Pokemon not found. Insert a valid ID.");
     }
   };
 }

@@ -2,7 +2,6 @@ const axios = require("axios");
 
 const getApiPokemons = async () => {
   try {
-    //hago un get desde url principal (trae un obj con varias keys -> count, next, previous, results)
     const apiFirstPageResponse = await axios.get(
       "https://pokeapi.co/api/v2/pokemon"
     );

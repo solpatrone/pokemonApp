@@ -15,7 +15,7 @@ app.get("/", async (req, res) => {
         console.log(foundPokemon);
         return res.send(foundPokemon);
       } else {
-        return res.status(400).send("Tu pokemon no ha sido encontrado");
+        return res.status(400).send("Pokemon not found");
       }
     }
 
@@ -42,7 +42,6 @@ app.get("/:idPokemon", async (req, res) => {
     const foundPokemon = pokemons.find(
       (p) => p.id.toString() === idPokemon.toString()
     );
-
     res.send(foundPokemon);
   } catch (e) {
     console.log(e);
@@ -53,7 +52,7 @@ app.post("/", async (req, res) => {
   const {
     name,
     hp,
-    strength,
+    attack,
     defense,
     speed,
     weight,
@@ -67,7 +66,7 @@ app.post("/", async (req, res) => {
       let newPokemon = await Pokemon.create({
         name,
         hp,
-        strength,
+        attack,
         defense,
         speed,
         weight,
@@ -88,7 +87,7 @@ app.post("/", async (req, res) => {
       newPokemon.addType(newType);
       return res.send(newPokemon);
     } else {
-      return res.status(404).send("Falta ingresar el nombre del pokemon");
+      return res.status(404).send("Pokemon name required");
     }
   } catch (e) {
     console.log(e);
