@@ -93,3 +93,11 @@ select {
   line-height: 30px;
   height: 30px;
 }
+
+.error {
+  text-align: center;
+  font-size: 30px;
+  width: 1200px;
+  text-transform: uppercase;
+  color: #fbd148;
+}

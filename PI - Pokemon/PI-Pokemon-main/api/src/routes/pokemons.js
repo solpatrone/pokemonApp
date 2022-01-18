@@ -8,8 +8,8 @@ app.get("/", async (req, res) => {
   try {
     const pokemons = await getAllInfo();
     if (name) {
-      const foundPokemon = pokemons.filter(
-        (p) => p.name.toLowerCase() === name.toLowerCase()
+      const foundPokemon = pokemons.filter((p) =>
+        p.name.toLowerCase().includes(name.toLowerCase())
       );
       if (foundPokemon.length > 0) {
         console.log(foundPokemon);

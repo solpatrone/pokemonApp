@@ -9,13 +9,16 @@ export default function ErrorPage() {
       <div className={s.container}>
         <div className={s.surprised}>
           <div className={s.border}>
-            <h2>Ups! Ha ocurrido un error!</h2>
-            <p>La página que buscas no ha sido encontrada</p>
+            <h2>Whoops! Page Not found!</h2>
+            <p>
+              You are either misspelling the URL the requesting a page that
+              doesn't exist!
+            </p>
           </div>
           <img src={pikachu} alt="Pikachu sorprendido" width="500px" />
         </div>
         <Link to="/home" className={s.btnContainer}>
-          <button className={s.btn}>Home</button>
+          <button className={s.btn}>Go Home</button>
         </Link>
       </div>
     </div>

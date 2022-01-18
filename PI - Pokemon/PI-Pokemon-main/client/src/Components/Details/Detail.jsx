@@ -36,20 +36,34 @@ export default function Detail(props) {
             </div>
             <div className={s.col}>
               <div className={s.info}>
-                <h3>Información:</h3>
-                <p>Id: {pokemon.id}</p>
+                <h3>Information:</h3>
                 <p>
-                  Type:
+                  <strong>Id: </strong> {pokemon.id}
+                </p>
+                <p>
+                  <strong>Type: </strong>
                   {!pokemon.createdInDb
                     ? pokemon.types + " "
                     : pokemon.types.map((p) => p.name + " ")}
                 </p>
-                <p>Vida: {pokemon.hp}</p>
-                <p>Fuerza: {pokemon.attack}</p>
-                <p>Defensa: {pokemon.defense}</p>
-                <p>Velocidad: {pokemon.speed}</p>
-                <p>Altura: {pokemon.height}</p>
-                <p>Peso: {pokemon.weight}</p>
+                <p>
+                  <strong>Hp: </strong> {pokemon.hp}
+                </p>
+                <p>
+                  <strong>Strength: </strong> {pokemon.attack}
+                </p>
+                <p>
+                  <strong>Deffense: </strong> {pokemon.defense}
+                </p>
+                <p>
+                  <strong>Speed: </strong> {pokemon.speed}
+                </p>
+                <p>
+                  <strong>Height: </strong> {pokemon.height}
+                </p>
+                <p>
+                  <strong>Weight: </strong> {pokemon.weight}
+                </p>
               </div>
             </div>
           </div>

@@ -2,47 +2,45 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTypes, postPokemon } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../../images/log.png";
 import s from "./CreatePokemon.module.css";
 
 export function validate(pokemon) {
-  let error = {};
-
-  if (!pokemon.name || pokemon.name === "") {
-    error.name = "Nombre requerido.";
+  let error = { disableBtn: false };
+  if (!pokemon.name) {
+    error.name = "Name required";
+    error.disableBtn = true;
   } else if (!/\S{5,20}[^0-9]/.test(pokemon.name)) {
     error.name =
-      "El nombre debe contener entre 5 y 20 letras. No acepta numeros.";
+      "The name should be between 5 and 20 characters (no numbers allowed)";
+    error.disableBtn = true;
   }
 
   if (pokemon.attack < 0 || pokemon.attack > 200) {
-    error.attack = "El número debe ser mayor a 0 y menor a 200";
+    error.attack = "The number should be higher than 0 and lower than 200";
   }
 
   if (pokemon.hp < 0) {
-    error.hp = "El número debe ser mayor a 0";
+    error.hp = "The number should be higher than 0";
   }
 
   if (pokemon.defense < 0) {
-    error.defense = "El número debe ser mayor a 0";
+    error.defense = "The number should be higher than 0";
   }
 
   if (pokemon.speed < 0) {
-    error.speed = "El número debe ser mayor a 0";
+    error.speed = "The number should be higher than 0";
   }
 
   if (pokemon.height < 0) {
-    error.height = "El número debe ser mayor a 0";
+    error.height = "The number should be higher than 0";
   }
 
   if (pokemon.weight < 0) {
-    error.weight = "El número debe ser mayor a 0";
+    error.weight = "The number should be higher than 0";
   }
 
-  if (pokemon.types.length < 0 || pokemon.types.length > 4) {
-    error.types = "Seleccione entre 1 y 3 tipos";
-  }
   return error;
 }
 
@@ -58,13 +56,12 @@ export default function CreatePokemon() {
     img: "",
     types: [],
   });
-
-  console.log(pokemon);
-
-  const [error, setError] = useState({});
+  const [error, setError] = useState({ disableBtn: true });
 
   const dispatch = useDispatch();
   const allTypes = useSelector((state) => state.types);
+
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getAllTypes());
@@ -101,6 +98,7 @@ export default function CreatePokemon() {
       img: "",
       types: [],
     });
+    history.push("/home");
   }
 
   function handleDelete(tipo) {
@@ -119,15 +117,15 @@ export default function CreatePokemon() {
       </header>
       <main className={s.main}>
         <div className={s.formContainer}>
-          <h3 className={s.title}>Crea tu Pokemon!</h3>
+          <h3 className={s.title}>Create your Pokemon!</h3>
 
           <div className={s.form}>
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className={s.inputContainer}>
-                <label>Nombre</label>
+                <label>Name</label>
                 <input
                   type="text"
-                  placeholder="Ingresa un nombre"
+                  placeholder="Enter a name"
                   value={pokemon.name}
                   name="name"
                   autoComplete="off"
@@ -169,10 +167,10 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Ataque</label>
+                <label>Strength</label>
                 <input
                   type="number"
-                  placeholder="Ingresa puntos de fuerza"
+                  placeholder="Enter a value"
                   value={pokemon.attack}
                   name="attack"
                   onChange={(e) => handleChange(e)}
@@ -190,10 +188,10 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Defensa</label>
+                <label>Defense</label>
                 <input
                   type="number"
-                  placeholder="Ingresa puntos de defensa"
+                  placeholder="Enter a value"
                   value={pokemon.defense}
                   name="defense"
                   onChange={(e) => handleChange(e)}
@@ -212,10 +210,10 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Velocidad</label>
+                <label>Speed</label>
                 <input
                   type="number"
-                  placeholder="Ingresa un valor de velocidad"
+                  placeholder="Enter a value"
                   value={pokemon.speed}
                   name="speed"
                   onChange={(e) => handleChange(e)}
@@ -234,10 +232,10 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Altura</label>
+                <label>Height</label>
                 <input
                   type="number"
-                  placeholder="Ingresa un valor de altura"
+                  placeholder="Enter a value"
                   value={pokemon.height}
                   name="height"
                   onChange={(e) => handleChange(e)}
@@ -256,10 +254,10 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Peso</label>
+                <label>Weight</label>
                 <input
                   type="number"
-                  placeholder="Ingresa un valor de peso"
+                  placeholder="Enter a value"
                   value={pokemon.weight}
                   name="weight"
                   onChange={(e) => handleChange(e)}
@@ -278,10 +276,10 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Imagen</label>
+                <label>Image</label>
                 <input
                   type="text"
-                  placeholder="Ingresa una url"
+                  placeholder="Enter a url"
                   value={pokemon.img}
                   name="img"
                   onChange={(e) => handleChange(e)}
@@ -289,11 +287,12 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                <label>Tipo</label>
+                <label>Type</label>
                 <select onChange={(e) => handleSelect(e)}>
+                  <option>Types</option>
                   {allTypes &&
-                    allTypes.map((t) => (
-                      <option value={t.name} key={t.name} name="types">
+                    allTypes.map((t, i) => (
+                      <option value={t.name} key={i} name="types">
                         {t.name}
                       </option>
                     ))}
@@ -301,12 +300,11 @@ export default function CreatePokemon() {
 
                 <div>
                   <ul>
-                    {pokemon.types.map((tipo) => (
+                    {pokemon.types.map((tipo, i) => (
                       <div className={s.selected}>
-                        <li key={tipo}>{tipo}</li>
+                        <li key={i}>{tipo}</li>
                         <button
                           onClick={() => handleDelete(tipo)}
-                          key={tipo}
                           className={s.btnDelete}
                         >
                           X
@@ -318,9 +316,12 @@ export default function CreatePokemon() {
               </div>
 
               <div className={s.inputContainer}>
-                {error.name ? null : (
-                  <input type="submit" value="Enviar" className={s.btn} />
-                )}
+                <input
+                  type="submit"
+                  value="Create!"
+                  className={s.btn}
+                  disabled={error.disableBtn}
+                />
               </div>
             </form>
           </div>

@@ -3,6 +3,8 @@ const initialState = {
   copyPokemons: [],
   types: [],
   detail: [],
+  loading: false,
+  error: "",
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,6 +14,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: action.payload,
         copyPokemons: action.payload,
+        loading: false,
       };
     case "GET_ALL_TYPES":
       return {
@@ -52,7 +55,7 @@ function rootReducer(state = initialState, action) {
             });
       return {
         ...state,
-        pokemons: sortedArray,
+        copyPokemons: sortedArray,
       };
     case "ORDER_BY_STRENGTH":
       let orderedArray =
@@ -84,7 +87,7 @@ function rootReducer(state = initialState, action) {
 
     case "FILTER_BY_CREATION":
       const pokemonCopyArray = state.pokemons;
-      console.log(pokemonCopyArray);
+      // console.log(pokemonCopyArray);
       const filteredCreation =
         action.payload === "createdInDb"
           ? pokemonCopyArray.filter((pokemon) => pokemon.createdInDb)
@@ -99,9 +102,13 @@ function rootReducer(state = initialState, action) {
       const filteredArray =
         action.payload === "all"
           ? allPokemons
-          : allPokemons.filter((pokemon) =>
-              pokemon.types.includes(action.payload)
-            );
+          : allPokemons.filter((pokemon) => {
+              if (!pokemon.createdInDb) {
+                return pokemon.types.find((t) => t === action.payload);
+              } else {
+                return pokemon.types.find((t) => t.name === action.payload);
+              }
+            });
       return {
         ...state,
         copyPokemons: filteredArray,
@@ -110,6 +117,17 @@ function rootReducer(state = initialState, action) {
     case "POST_POKEMON":
       return {
         ...state,
+      };
+
+    case "LOADING":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "ERROR":
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

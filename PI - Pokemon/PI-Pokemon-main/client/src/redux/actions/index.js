@@ -2,6 +2,9 @@ const axios = require("axios");
 
 export function getAllPokemons() {
   return async function (dispatch) {
+    dispatch({
+      type: "LOADING",
+    });
     try {
       const json = await axios.get("http://localhost:3001/pokemons");
       return dispatch({
@@ -18,13 +21,14 @@ export function getPokemonByName(name) {
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3001/pokemons?name=" + name);
-      console.log(json.data);
+      // console.log(json.data);
       return dispatch({
         type: "GET_POKEMON_BY_NAME",
         payload: json.data,
       });
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
+      dispatch({ type: "ERROR", payload: e.message });
     }
   };
 }
@@ -41,7 +45,7 @@ export function getPokemonById(id) {
           })
         );
     } catch (e) {
-      console.log();
+      console.log(e);
     }
   };
 }
