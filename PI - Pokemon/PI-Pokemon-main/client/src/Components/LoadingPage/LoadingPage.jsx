@@ -6,7 +6,7 @@ export default function LoadingPage() {
   return (
     <div className={s.container}>
       <img src={spinner} alt="" />
-      <h3>Cargando...</h3>
+      <h5>Loading...</h5>
     </div>
   );
 }

@@ -47,6 +47,12 @@ export function validate(pokemon) {
     error.disableBtn = true;
   }
 
+  //MOSTRAR NO FUNC X Q?
+  // if (pokemon.types.length <= 0 || pokemon.types.length > 3) {
+  //   error.types = "Pick between 1 and 3 types";
+  //   error.disableBtn = true;
+  // }
+
   return error;
 }
 
@@ -93,7 +99,7 @@ export default function CreatePokemon() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(postPokemon(pokemon));
-    alert("Tu pokemon ha sido creado");
+    alert("Your pokemon has been created");
     setPokemon({
       name: "",
       hp: 0,
@@ -290,6 +296,7 @@ export default function CreatePokemon() {
                 <input
                   type="text"
                   placeholder="Enter a url"
+                  autoComplete="off"
                   value={pokemon.img}
                   name="img"
                   onChange={(e) => handleChange(e)}
@@ -299,29 +306,33 @@ export default function CreatePokemon() {
               <div className={s.inputContainer}>
                 <label>Type</label>
                 <select onChange={(e) => handleSelect(e)}>
-                  <option>Types</option>
+                  <option disabled>Types</option>
                   {allTypes &&
-                    allTypes.map((t) => (
-                      <option value={t.name} key={t.name} name="types">
-                        {t.name}
-                      </option>
-                    ))}
+                    allTypes.map((t) => {
+                      return (
+                        <option value={t.name} key={t.name} name="types">
+                          {t.name}
+                        </option>
+                      );
+                    })}
                 </select>
 
                 <div>
-                  <ul>
-                    {pokemon.types.map((tipo, i) => (
-                      <div className={s.selected} key={i}>
-                        <li>{tipo}</li>
+                  {pokemon.types.map((e) => {
+                    return (
+                      <div className={s.selected} key={e}>
+                        <p className={s.p}>{e}</p>
                         <button
-                          onClick={() => handleDelete(tipo)}
+                          onClick={() => {
+                            handleDelete(e);
+                          }}
                           className={s.btnDelete}
                         >
-                          X
+                          x
                         </button>
                       </div>
-                    ))}
-                  </ul>
+                    );
+                  })}
                 </div>
               </div>
 

@@ -141,12 +141,15 @@
   justify-content: space-between;
 }
 
-li {
-  list-style: none;
+.p {
   text-transform: capitalize;
-  width: 200px;
   color: #fff;
   padding: 3px;
+  display: flex;
+  height: 23px;
+  margin-top: -2px;
+  margin-left: 2px;
+  justify-content: center;
 }
 
 .btnDelete {
