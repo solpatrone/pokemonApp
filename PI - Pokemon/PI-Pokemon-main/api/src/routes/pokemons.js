@@ -12,7 +12,7 @@ app.get("/", async (req, res) => {
         p.name.toLowerCase().includes(name.toLowerCase())
       );
       if (foundPokemon.length > 0) {
-        console.log(foundPokemon);
+        // console.log(foundPokemon);
         return res.send(foundPokemon);
       } else {
         return res.status(400).send("Pokemon not found");
