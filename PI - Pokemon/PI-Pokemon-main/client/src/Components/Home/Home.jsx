@@ -16,6 +16,8 @@ import {
 import logo from "../../images/log.png";
 import s from "./Home.module.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import NotFound from "../NotFound/NotFound";
+import FilterBar from "../FilterBar/FilterBar";
 
 export default function Home() {
   //estados globales
@@ -72,52 +74,27 @@ export default function Home() {
   return (
     <div className={s.container}>
       <header className={s.header}>
-        <div className={s.image}>
+        <div className={s.title}>
           <img src={logo} alt="Pokemon logo" className={s.logo} />
+          <div className={s.create}>
+            <Link to="/create" className={s.link}>
+              Create Pokemon
+            </Link>
+          </div>
         </div>
         <div className={s.functional}>
-          <div className={s.ppal}>
-            <div className={s.search}>
-              <SearchBar />
-            </div>
-            <div className={s.create}>
-              <Link to="/create" className={s.link}>
-                Create Pokemon
-              </Link>
-            </div>
+          <div className={s.filters}>
+            <FilterBar
+              allTypes={allTypes}
+              handleSort={handleSort}
+              handleOrderByStr={handleOrderByStr}
+              handleFilterType={handleFilterType}
+              handleCreation={handleCreation}
+            />
           </div>
-          <div className={s.filter}>
-            <div>
-              <select onChange={(e) => handleSort(e)}>
-                <option disabled>Alphabetical</option>
-                <option value="asc_alf">A to Z</option>
-                <option value="des_alf">Z to A</option>
-              </select>
-            </div>
-            <div>
-              <select onChange={(e) => handleOrderByStr(e)}>
-                <option value="asc_str">High to Low Strength</option>
-                <option value="des_str">Low to High Strength</option>
-              </select>
-            </div>
-            <div>
-              <select onChange={(e) => handleFilterType(e)}>
-                <option value="all">All</option>
-                {allTypes &&
-                  allTypes.map((t) => (
-                    <option value={t.name} key={t.name}>
-                      {t.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <div>
-              <select onChange={(e) => handleCreation(e)}>
-                <option value="all">All</option>
-                <option value="createdInDb">Created</option>
-                <option value="api">API</option>
-              </select>
-            </div>
+
+          <div className={s.search}>
+            <SearchBar />
           </div>
         </div>
       </header>
@@ -126,8 +103,7 @@ export default function Home() {
         <div className={s.cards}>
           {loading ? (
             <LoadingPage />
-          ) : (
-            currentPokemons &&
+          ) : currentPokemons.length > 0 ? (
             currentPokemons.map((p) => (
               <Card
                 name={p.name}
@@ -138,6 +114,8 @@ export default function Home() {
                 createdInDb={p.createdInDb}
               />
             ))
+          ) : (
+            <NotFound />
           )}
         </div>
         <div className={s.paginado}>

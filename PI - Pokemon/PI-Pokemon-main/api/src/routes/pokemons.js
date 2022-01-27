@@ -8,14 +8,14 @@ app.get("/", async (req, res) => {
   try {
     const pokemons = await getAllInfo();
     if (name) {
-      const foundPokemon = pokemons.filter((p) =>
-        p.name.toLowerCase().includes(name.toLowerCase())
+      const foundPokemon = pokemons.filter(
+        (p) => p.name.toLowerCase() === name.toLowerCase()
       );
       if (foundPokemon.length > 0) {
         // console.log(foundPokemon);
         return res.send(foundPokemon);
       } else {
-        return res.status(400).send("Pokemon not found");
+        return res.send([]);
       }
     }
 
@@ -39,10 +39,14 @@ app.get("/:idPokemon", async (req, res) => {
   const { idPokemon } = req.params;
   try {
     const pokemons = await getAllInfo();
-    const foundPokemon = pokemons.find(
+    const foundPokemon = pokemons.filter(
       (p) => p.id.toString() === idPokemon.toString()
     );
-    res.send(foundPokemon);
+    if (foundPokemon.length > 0) {
+      res.send(foundPokemon);
+    } else {
+      res.send([]);
+    }
   } catch (e) {
     console.log(e);
   }

@@ -24,11 +24,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         detail: action.payload,
+        loading: false,
       };
     case "GET_POKEMON_BY_NAME":
       return {
         ...state,
         copyPokemons: action.payload,
+        loading: false,
       };
 
     case "ORDER_BY_NAME":

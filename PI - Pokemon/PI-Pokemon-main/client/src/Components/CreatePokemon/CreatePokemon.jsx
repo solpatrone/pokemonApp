@@ -47,12 +47,6 @@ export function validate(pokemon) {
     error.disableBtn = true;
   }
 
-  //MOSTRAR NO FUNC X Q?
-  // if (pokemon.types.length <= 0 || pokemon.types.length > 3) {
-  //   error.types = "Pick between 1 and 3 types";
-  //   error.disableBtn = true;
-  // }
-
   return error;
 }
 
@@ -68,6 +62,8 @@ export default function CreatePokemon() {
     img: "",
     types: [],
   });
+
+  console.log(pokemon.types);
 
   const [error, setError] = useState({ disableBtn: true });
 

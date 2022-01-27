@@ -4,44 +4,34 @@
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  display: grid;
   background-image: url("../../images/dark-bgd.jpg");
   background-size: cover;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
 }
 
 .logo {
   width: 100px;
 }
 
-.image {
-  margin-left: 10px;
-}
-
 .functional {
-  width: 60%;
   display: flex;
-  flex-direction: column;
-  margin: 10px 20px;
+  justify-content: space-between;
+  padding: 0 15px;
 }
 
-.ppal {
+.filters {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: center;
-  margin-bottom: 20px;
-}
-.create {
-  margin-top: 6px;
 }
 
-.filter {
+.search {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
 }
 
 select {
@@ -54,19 +44,18 @@ select {
 }
 
 .link {
+  color: #fbd148;
+  background-color: rgb(19, 19, 19, 0.7);
+  border: 1px solid #fbd148;
   border-radius: 3px;
   text-decoration: none;
   padding: 6px 16px;
-  color: #fbd148;
-  background-color: rgb(19, 19, 19, 0.7);
-  font-family: "Roboto Slab", serif;
-  border: 1px solid #fbd148;
-  box-shadow: 2px 3px 2px rgba(20, 15, 0, 0.7);
+  font-size: 16px;
+  margin: 10px 0px;
 }
 
 .link:hover {
   box-shadow: 2px 3px 16px 3px rgb(245, 192, 58, 0.7);
-  font-family: "Roboto Slab", serif;
 }
 
 .main {

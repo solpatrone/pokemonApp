@@ -1,9 +1,12 @@
 .container {
   display: flex;
-  gap: 6px;
+  gap: 15px;
+  margin-top: -3px;
+  margin-bottom: 3px;
 }
 .input {
-  width: 230px;
+  width: 200px;
+  height: 26px;
   border: none;
   border-radius: 3px;
   font-size: 15px;
@@ -16,22 +19,18 @@
 }
 
 .button {
-  border: none;
-  border-radius: 3px;
-  text-decoration: none;
   width: 100px;
-  padding: 6px;
-  color: #fbd148;
-
+  padding: 4px;
   background-color: rgb(19, 19, 19, 0.7);
-  border: 1px solid #fbd148;
-  box-shadow: 2px 3px 2px rgba(20, 15, 0, 0.7);
 
+  border: 1px solid #fbd148;
+  border-radius: 3px;
+
+  color: #fbd148;
+  text-decoration: none;
   font-size: 15px;
 }
 
 .button:hover {
   box-shadow: 2px 3px 16px 3px rgb(245, 192, 58, 0.7);
-  transform: scale(1);
-  font-family: "Roboto Slab", serif;
 }

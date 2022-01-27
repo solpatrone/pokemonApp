@@ -19,9 +19,11 @@ export function getAllPokemons() {
 
 export function getPokemonByName(name) {
   return async function (dispatch) {
+    dispatch({
+      type: "LOADING",
+    });
     try {
       let json = await axios.get("http://localhost:3001/pokemons?name=" + name);
-      // console.log(json.data);
       return dispatch({
         type: "GET_POKEMON_BY_NAME",
         payload: json.data,
@@ -35,6 +37,9 @@ export function getPokemonByName(name) {
 
 export function getPokemonById(id) {
   return async function (dispatch) {
+    dispatch({
+      type: "LOADING",
+    });
     try {
       const response = await fetch("http://localhost:3001/pokemons/" + id);
       const data = await response.json();
@@ -44,7 +49,6 @@ export function getPokemonById(id) {
       });
     } catch (e) {
       console.log(e);
-      alert("Pokemon not found. Insert a valid ID.");
     }
   };
 }

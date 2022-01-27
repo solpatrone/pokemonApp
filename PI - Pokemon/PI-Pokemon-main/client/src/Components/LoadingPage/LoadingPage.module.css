@@ -3,7 +3,9 @@
 }
 
 h5 {
-  font-size: 30px;
+  font-size: 20px;
   text-transform: uppercase;
-  color: #fbd148;
+  font-weight: lighter;
+  letter-spacing: 6px;
+  color: rgb(230, 23, 23);
 }

@@ -5,15 +5,16 @@ import Home from "./Components/Home/Home";
 import CreatePokemon from "./Components/CreatePokemon/CreatePokemon";
 import Detail from "./Components/Details/Detail";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
   return (
     <Routes>
       <div className="App">
         <Switch>
-          <Route exact path="/" component={LandingPage}></Route>
-          <Route exact path="/home" component={Home}></Route>
-          <Route exact path="/home/:id" component={Detail}></Route>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/home/:id" component={Detail} />
           <Route exact path="/create" component={CreatePokemon} />
           <Route path="*" component={ErrorPage} />
         </Switch>

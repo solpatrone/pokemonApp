@@ -111,16 +111,14 @@
 }
 
 .btn {
-  padding: 6px;
+  margin: 10px 0px;
+  padding: 6px 16px;
   color: #fbd148;
-
   background-color: rgb(19, 19, 19, 0.7);
   border: 1px solid #fbd148;
   border-radius: 3px;
   text-decoration: none;
-  padding: 6px 16px;
   font-size: 16px;
-  margin: 10px 0px;
 }
 
 .inputContainer select {
